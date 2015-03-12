@@ -7,5 +7,7 @@ __date__ = "mars 2015"
 
 if __name__ == "__main__":
     print "This is Gphy"
-    print "tutututlute"
-    
+    if 2+2==4:
+        print "tutututlute"
+    else:
+        print "asta la vista"
