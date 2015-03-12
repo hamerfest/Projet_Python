@@ -7,7 +7,4 @@ __date__ = "mars 2015"
 
 if __name__ == "__main__":
     print "This is Gphy"
-    if 1+1==2:
-        print "tutututlute"
-    else :
-        print "gameover"
+
