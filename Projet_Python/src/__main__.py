@@ -11,7 +11,3 @@ if __name__ == "__main__":
         print "tutututlute"
     else :
         print "gameover"
-    if 2+2==4:
-        print "tutututlute"
-    else:
-        print "asta la vista"
