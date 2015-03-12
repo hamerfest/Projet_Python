@@ -11,3 +11,5 @@ if __name__ == "__main__":
         print "tutututlute"
     else :
         print "gameover"
+        
+print "youpi"
