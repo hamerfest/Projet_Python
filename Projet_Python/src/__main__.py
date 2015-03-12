@@ -2,8 +2,8 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 
-__author__ = "Djo"
-__date__ = "$12 mars 2015 15:25:43$"
+__author__ = "Johanne"
+__date__ = "mars 2015"
 
 if __name__ == "__main__":
-    print "Hello World"
+    print "This is Gphy"
