@@ -2,9 +2,10 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 
-__author__ = "Johanne"
+__author__ = "Non c'est moi"
 __date__ = "mars 2015"
 
 if __name__ == "__main__":
     print "This is Gphy"
+    print "tutututlute"
     
