@@ -28,18 +28,21 @@ def Menu():
             print("********************************************************************************")
             print("                         RECHERCHE DES MOTIFS REPETES")
             print("********************************************************************************\n") 
-            #sequence test
-            seq="accaccaccag"
-            #taille test
-            k=3
+#            #sequence test
+#            seq="accaccaccag"
+#            #taille test
+#            k=3
             import __premiere_partie_B__
-            #Creation L + Affichage
-            L = __premiere_partie_B__.__Creation_Liste_Taille__(seq,k)
-            __premiere_partie_B__.__Affiche_Liste_Taille__(L)
-            L1=__premiere_partie_B__.__Creation_Liste_Taille_Base10__(L)
-            M=__premiere_partie_B__.__Initialisation_Table_M_(L1)
-            H=__premiere_partie_B__.__Initialisation_Table_H_(L)
-            __premiere_partie_B__.__Remplissage_M_H__(L1,H,M)
+#            #Creation L + Affichage
+#            L = __premiere_partie_B__.__Creation_Liste_Taille__(seq,k)
+#            L1=__premiere_partie_B__.__Creation_Liste_Taille_Base10__(L)
+#            M=__premiere_partie_B__.__Initialisation_Table_M_(L1)
+#            H=__premiere_partie_B__.__Initialisation_Table_H_(L)
+#            H,M=__premiere_partie_B__.__Remplissage_M_H__(L1,H,M)
+#            print M
+#            print H
+            L,L1,H,M=__premiere_partie_B__.__Creation_des_tables__()
+            __premiere_partie_B__.__Utilisation_des_tables__(L,L1,H,M)
         elif Choix=="Q":
             print("Au revoir")    
             exit()

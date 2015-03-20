@@ -20,14 +20,6 @@ def __Creation_Liste_Taille__(sequence,taille):
         else :
             break
     return L
-
-
-
-def __Affiche_Liste_Taille__(L):
-     """
-     Affiche liste L
-     """
-     print L
      
 def __Lettre_Base_4__(motif):
     """
@@ -99,3 +91,41 @@ def __Remplissage_M_H__(L1,H,M):
             M[i]=H[n]
             H[n]=i+1
     return H,M
+
+
+
+def __Creation_des_tables__():
+    """
+    Programme qui permet de saisir une sequence nucleique
+    puis creer les listes L et L1 et les tables H et M associes
+    et les affiche
+    """
+    seq=raw_input("Saisissez une sequence nucleique : \n")
+    L =__Creation_Liste_Taille__(seq,3)
+    L1=__Creation_Liste_Taille_Base10__(L)
+    M=__Initialisation_Table_M_(L1)
+    H=__Initialisation_Table_H_(L)
+    H,M=__Remplissage_M_H__(L1,H,M)
+    print "Liste cree L :"
+    print L
+    print "Liste cree L1 :"
+    print L1
+    print "Table associe M :"
+    print M
+    print "Table associe H :"
+    print H
+    return L,L1,H,M
+
+def __Utilisation_des_tables__(L,L1,H,M):
+    motif=raw_input("Saissez un motif de taille 3 : \n")
+    #transformation du motif en score type L1
+    score=__Base_4_En_Base_10__(__Lettre_Base_4__(motif))
+    res=H[score]
+    #
+    if res>0:
+        print "Le motif "+motif+" apparait en position "+str(H[score])
+        
+        while M[res-1]>0:
+            print "Le motif "+motif+" apparait en position "+str(M[res-1])
+            res=M[res-1]
+        
