@@ -2,12 +2,10 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 
-__author__ = "Gphy"
-__date__ = "mars 2015"
 
 
 #Menu Principal et gestion des choix
-def menu():
+def Menu():
     print("********************************************************************************")
     print("                                      MENU")
     print("********************************************************************************\n")
@@ -30,6 +28,18 @@ def menu():
             print("********************************************************************************")
             print("                         RECHERCHE DES MOTIFS REPETES")
             print("********************************************************************************\n") 
+            #sequence test
+            seq="accaccaccag"
+            #taille test
+            k=3
+            import __premiere_partie_B__
+            #Creation L + Affichage
+            L = __premiere_partie_B__.__Creation_Liste_Taille__(seq,k)
+            __premiere_partie_B__.__Affiche_Liste_Taille__(L)
+            L1=__premiere_partie_B__.__Creation_Liste_Taille_Base10__(L)
+            M=__premiere_partie_B__.__Initialisation_Table_M_(L1)
+            H=__premiere_partie_B__.__Initialisation_Table_H_(L)
+            __premiere_partie_B__.__Remplissage_M_H__(L1,H,M)
         elif Choix=="Q":
             print("Au revoir")    
             exit()
@@ -39,4 +49,4 @@ def menu():
             continue
             
             
-menu()
+Menu()
