@@ -76,32 +76,48 @@ def __Initialisation_Table_H_(L):
     H=list()
     
     k=len(L[0])
-    for i in range(4**k): # de 0 a 4**k-1
-        H.append(0)
-    return H
+    try :
+        for i in range(4**k): # de 0 a 4**k-1
+            H.append(0)
+        return H
+    except OverflowError:
+        print "Erreur lors de la contruction de la table H. k est trop grand"
+    except MemoryError:
+        print "Erreur, Memoire insufisante"    
+        
 
 def __Remplissage_M_H__(L1,H,M):
-    # de 1 a taille de L1
-    for i in range(len(L1)): # de 0 a taille L1-1 
-    # test : i va de 0 a 8
-        n=L1[i]
-        if H[n]==0:
-            H[n]=i+1
-        else :
-            M[i]=H[n]
-            H[n]=i+1
-    return H,M
-
+    try:
+        # de 1 a taille de L1
+        for i in range(len(L1)): # de 0 a taille L1-1 
+        # test : i va de 0 a 8
+            n=L1[i]
+            if H[n]==0:
+                H[n]=i+1
+            else :
+                M[i]=H[n]
+                H[n]=i+1
+        return H,M
+    except TypeError:
+        print "Erreur lors du remplissage des tables H et M"
+        return H,M
 
 
 def __Creation_des_tables__():
+    import __saisie__
     """
     Programme qui permet de saisir une sequence nucleique
     puis creer les listes L et L1 et les tables H et M associes
     et les affiche
     """
-    seq=raw_input("Saisissez une sequence nucleique : \n")
-    L =__Creation_Liste_Taille__(seq,3)
+    #TODO 
+    print "Saisissez une sequence nucleique : "
+    seq=__saisie__.SaisieADN()
+    #saisie controlee de taille de sequence positif et inf ou egal a la taille de seq
+    print "Saisissez une taille k de motif (positif):"
+    k=__saisie__.SaisieIntBorne(1,len(seq))
+
+    L =__Creation_Liste_Taille__(seq,k)
     L1=__Creation_Liste_Taille_Base10__(L)
     M=__Initialisation_Table_M_(L1)
     H=__Initialisation_Table_H_(L)
@@ -117,10 +133,16 @@ def __Creation_des_tables__():
     return L,L1,H,M
 
 def __Utilisation_des_tables__(L,L1,H,M):
-    motif=raw_input("Saissez un motif de taille 3 : \n")
+    import __saisie__
+    #TODO verifier la taille du motif "Package saisie
+    print "Saissez un motif de taille "+str(len(L[0]))+ ": "
+    motif=__saisie__.SaisieADNBornee(len(L[0]),len(L[0]))
+    
+    
     #transformation du motif en score type L1
     score=__Base_4_En_Base_10__(__Lettre_Base_4__(motif))
     res=H[score]
+    
     #
     if res>0:
         print "Le motif "+motif+" apparait en position "+str(H[score])
@@ -128,4 +150,5 @@ def __Utilisation_des_tables__(L,L1,H,M):
         while M[res-1]>0:
             print "Le motif "+motif+" apparait en position "+str(M[res-1])
             res=M[res-1]
-        
+    else :
+        print "Ce motif n'apparait pas dans la sequence initiale\n"

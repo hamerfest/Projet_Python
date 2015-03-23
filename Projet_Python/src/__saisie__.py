@@ -5,7 +5,95 @@
 __author__ = "Gphy"
 __date__ = "mars 2015"
 
+def SaisieInt():
+    """
+    Saisie controlee d'un entier
+    """
+    while True:
+        try:
+            n=int(raw_input("Entrez un nombre : "))
+            break
+        except ValueError:
+            print "Erreur de saisie, veuillez recommencer"
+            continue
+    return n
 
+def SaisieIntPositif():
+    """
+    Saisie controlee d'un entier superieur a zero
+    """
+    while True:
+        k=SaisieInt()
+        if k>0:
+            break
+        else:
+            print"Erreur de saisie, recommencez ."
+            continue
+    return k
+            
+def SaisieIntBorne(min,max):
+    """
+    Saisie controlee d'un entier borne entre min et max (inclus)
+    """
+    while True:
+        k=SaisieInt()
+        if k<=max and k>=min:
+            break
+        else:
+            if min==max:
+                print"Erreur de saisie! Le nombre doit etre egal a "+str(min)+" recommencez."
+            else: 
+                print"Erreur de saisie! Le nombre doit etre compris entre "+str(min)+" et "+str(max)+" recommencez."
+            continue
+    return k
+
+def ValideADN(seq):
+    """
+    Retourne True si la sequence est valide (atcg uniquement), FAUX sinon
+    """
+    seq.lower()
+    res=len(seq)!=0
+    for lettre in seq:
+        res=(res and True)\
+            if (lettre=='a') or (lettre=='c') or (lettre=='g') or (lettre=='t')\
+            else False
+    return res
+
+def SaisieADN():
+    """
+    Saisie controlee d'une chaine de caractere en ADN
+    Ne contient que des atcg case non sensitive
+    revoit la sequence correcte en minuscule
+    """
+    while True:
+        ADN=raw_input("Entrer un sequence d'ADN (atgc) : ")
+        ADN.lower()
+        if ValideADN(ADN):
+            print "Sequence saisie correcte"
+            break
+        else:
+            print "Erreur de saisie, recommencez "
+    return ADN
+
+def SaisieADNBornee(min,max):
+    """
+    Saisie controlee d'une chaine de caractere en ADN d'une taille min et max attendue
+    Ne contient que des atcg 
+    case non sensitive
+    revoit la sequence correcte en minuscule
+    """
+    while True:
+        if min==max: 
+            ADN=raw_input("Entrer un sequence d'ADN (atgc) de taille "+str(min)+" : ")
+        else:
+            ADN=raw_input("Entrer un sequence d'ADN (atgc) de taille compris entre "+str(min)+" et "+str(max)+" : ")
+        ADN.lower()
+        if ValideADN(ADN) and len(ADN)>=min and len(ADN)<=max:
+            print "Sequence saisie correcte"
+            break
+        else:
+            print "Erreur de saisie, recommencez "
+    return ADN
 #ChaineNettoyee(alphabet,mot): supprime les caracteres non compris dans l'alphabet
 #puis retourne ce nouveau mot
 
@@ -16,7 +104,7 @@ def ChaineNettoyee(alphabet,mot):
         if mot[i]==alphabet[j]:
             #Lettre suivante
             i+=1
-            #Reprise du début de l'alphabet
+            #Reprise du debut de l'alphabet
             j=0
         else :
             if j<len(alphabet)-1:
@@ -31,10 +119,10 @@ def ChaineNettoyee(alphabet,mot):
                 
 
     mot=str(mot.replace('~',''))
-    print("==> Chaine nettoyée : "+str(mot))
+    print("==> Chaine nettoyee : "+str(mot))
     return mot
 
-#Fonction qui vérifie si le mot est composé que des lettres de l'alphabet(=>liste)
+#Fonction qui verifie si le mot est compose que des lettres de l'alphabet(=>liste)
 #Si ok renvois le mot
 #Sinon proposition de resaisie ou effacer les lettres non incluses dans l'alphabet ou sortie de l'algo
 def SaisieMot(alphabet,mot) : #Case sensitive cf alphabet
@@ -52,20 +140,20 @@ def SaisieMot(alphabet,mot) : #Case sensitive cf alphabet
             if mot[i]==alphabet[j]:
                 #Lettre suivante
                 i+=1
-                #Reprise du début de l'alphabetS
+                #Reprise du debut de l'alphabetS
                 j=0
             else:
                 if j<len(alphabet)-1:
                     j+=1
                 else:
-                    #L'alphabet a été parcourue => Mauvaise lettre
+                    #L'alphabet a ete parcourue => Mauvaise lettre
                     print("\nErreur de saisie de "+str(mot)+" a la position "+str(i+1)+" selon l'alphabet "+str(alphabet)+" ")
                     Correct=False
                     while Correct == False:
                         res=input("Voulez-vous nettoyer toute la chaine de caractere ? (O/N) ")
                         res=res.upper()
                         if res=='O':
-                            print("Chaine Non nettoyée : "+str(mot))
+                            print("Chaine Non nettoyee : "+str(mot))
                             mot=str(ChaineNettoyee(alphabet,str(mot)))    
                             if len(mot)!=0 :
                                 print("==> Mot correct suivant l'alphabet "+str(alphabet))
