@@ -94,6 +94,7 @@ def SaisieADNBornee(min,max):
         else:
             print "Erreur de saisie, recommencez "
     return ADN
+
 #ChaineNettoyee(alphabet,mot): supprime les caracteres non compris dans l'alphabet
 #puis retourne ce nouveau mot
 
