@@ -1,6 +1,5 @@
 #-*- coding:Utf-8 -*-
 
-
 import __saisie__
 import __affichage__
 import __premiere_partie_A__
@@ -30,6 +29,8 @@ def Menu():
             __affichage__.menu_arbre_pref()
             __affichage__.aff_seq(seq)
             __affichage__.aff_k(k)
+            print("********************************************************************************\n")
+            
             while True:
                 Choix=raw_input("Sélectionner un menu : ")
                 Choix=Choix.upper()
@@ -47,9 +48,10 @@ def Menu():
                     __affichage__.menu_arbre_pref()
                     __affichage__.aff_seq(seq)
                     __affichage__.aff_k(k)
+                    print("********************************************************************************\n")
                     continue
                 
-                ## Choix A = saisie enitier k
+                ## Choix A = saisie entier k
                 elif Choix=="B":
                     k= __saisie__.SaisieIntPositif()
                     if seq !=None:
@@ -60,20 +62,23 @@ def Menu():
                     __affichage__.menu_arbre_pref()
                     __affichage__.aff_seq(seq)
                     __affichage__.aff_k(k)
+                    print("********************************************************************************\n")
                     continue
                     
                 # Construction de l'arbe - Visualisation de l'arbre des préfixes
                 ## Choix C = construction arbre
                 elif Choix=="C":
-#                    if (seq is None) | (k is None):
-#                        print("Il vous manque un entier et/ou une séquence pour construire un arbre ! ")
-#                        continue
-#                    
-#                    else:
+                    if seq==None or k==None:
+                        print("Une séquence et/ou un entier sont nécessaires pour construire l'arbre !")
+                    else:
                         A={}
-                        seq=('atcg')
-                        A=__premiere_partie_A__.insertion_arbre(A,seq)
-                        __affichage__.aff_arbre(A)
+                        __affichage__.menu_arbre_pref()
+                        __affichage__.aff_seq(seq)
+                        __affichage__.aff_k(k)
+                        print('¤ Arbre de préfixes:')
+                        __affichage__.aff_arbre(__premiere_partie_A__.construction_arbre(A,seq,k),0)
+                        print("********************************************************************************\n")
+                    continue
                 
                 # Autres choix du menu
                 elif Choix=="Q":
@@ -82,7 +87,8 @@ def Menu():
                 else:
                     print("Erreur de saisie!! RECOMMENCEZ ")
                     continue    
-            
+    
+    # PARTIE B - RECHERCHE DE MOTIFS REPETES - INDEXATION PAR TABLE DE HACHAGE
         elif Choix=="B":
             print("********************************************************************************")
             print("                         RECHERCHE DES MOTIFS REPETES")
