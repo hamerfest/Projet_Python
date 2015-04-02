@@ -106,7 +106,7 @@ def aff_arbre_simple (A,i):
     """
     #TODO ajouter des | pour voir mieux les noeud de même profondeur et de la même racine
     for lettre in A.keys():
-        if lettre!='succ':# cas si lien suffixe
+        if lettre!='suff':# cas si lien suffixe
             if i!=0:
              print"\n"+" "*i+"|->",
             else :
@@ -130,6 +130,6 @@ def aff_suffixe (A):
     #TODO ajouter des | pour voir mieux les noeud de même profondeur et de la même racine
     for lettre in A.keys():
         if lettre=='suff':# cas si lien suffixe
-            print A['succ']
+            print A['suff']
             print"***\n"
-            aff_suffixe(A['succ'])
+            aff_suffixe(A['suff'])

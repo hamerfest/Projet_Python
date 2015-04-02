@@ -19,48 +19,43 @@ def __Insert_Noeud_Successeurs__(A,seq):
     """
     #TODO vérifier qu'il a tout les cas possible et non des supperflus
     
-#    if A is None: #pas de noeud
-#        print "¤ Creation de l'abre ..."
-#        if len(seq)>0: # il reste des lettre
-#            A= __Initialisation_Arbre()
-#            __Insert_Noeud_Successeurs__(A, seq)
     if A=={}: # noeud vide => creer etiquette lettre
-        if len(seq)==1 :#seq est de 1
-            A[seq[0]]={} # cree etiquette
-            return A #nd le plus profond
-        elif len(seq)>1 and seq[0]!='$':#il reste des lettres autres que $
-            A[seq[0]]={}           
-            __Insert_Noeud_Successeurs__(A[seq[0]], seq[1:])#on passe à la lettre suivante
-        elif seq[0]=='$':
+        if seq[0]=='$':
             #TODO traitement de fin de suffixe
             A['$']={}
             return A
+        elif len(seq)==1 :#seq est de 1
+            A[seq[0]]={} # cree etiquette
+            return A #nd le plus profond
+        else:#il reste des lettres autres que $
+            A[seq[0]]={}           
+            return __Insert_Noeud_Successeurs__(A[seq[0]], seq[1:])#on passe à la lettre suivante
     elif seq[0] in A  :# Il existe un etiquette de la premiere lettre
         if seq[0]=='$':# Fin de sequence
             #TODO traitement de fin de suffixe
             A['$']={}
             return A
-            print "¤ Arbre construit ."
         elif A[seq[0]]=={}:#etiquette existe vide
             #TODO creer etiquette
             if len(seq[1:])>0: # il reste des lettres après
-                __Insert_Noeud_Successeurs__(A[seq[0]], seq[1:])#on passe à la lettre suivante
+                return __Insert_Noeud_Successeurs__(A[seq[0]], seq[1:])#on passe à la lettre suivante
             else:
                 return A
         else: #etiquette existe non vide
             if len(seq[1:])>0: # il reste des lettres après
-                __Insert_Noeud_Successeurs__(A[seq[0]], seq[1:])
+                return __Insert_Noeud_Successeurs__(A[seq[0]], seq[1:])
     else :# il n'existe pas d'etiquette
         if len(seq)==1 :#seq est de 1
             A[seq[0]]={} # cree etiquette
             return A #nd le plus profond
         elif len(seq)>1 and seq[0]!='$':#il reste des lettres autres que $
             A[seq[0]]={}           
-            __Insert_Noeud_Successeurs__(A[seq[0]], seq[1:])#on passe à la lettre suivante
+            return __Insert_Noeud_Successeurs__(A[seq[0]], seq[1:])#on passe à la lettre suivante
         else :
             #TODO traitement de fin de suffixe
             A['$']={}
             return A
+    
 
 def __Noeud_Profond__(A,seq):
     """
@@ -82,35 +77,35 @@ def __Is_Racine__(A):
         return True
     
 def __Insert_Suffixe__(N0,seq):
-    print N0
-    print seq
-    if 'suff' in N0:
-        Fils =N0
-        N0=N0['suff']
-        if seq[-1] in Fils:#t existe chez le pere
-            print"hello"
-    else:
-        N0[seq[-1]]={"suff":N0}
-        
+    N=N0
+    if 'suff' in N and seq[-1]!='$':
+        Nprim=N['suff'] 
+        Fils=N[seq[-1]]
+        if 'suff' in Fils:
+            print""
+        else:
+            if seq[-1] in Nprim:
+                Filsprim=Nprim[seq[-1]]
+            else:
+                Nprim[seq[-1]]={}
+                Filsprim=Nprim[seq[-1]]
+            Fils['suff']=Filsprim
+            N=Nprim
+    else: # initialisation
+        if len(seq)==1 and seq[0]!='$':
+            N[seq[0]]={'suff':N}
+
+def __Ajout_Dolar_Prefixe(A,seq):
+    for i in range(len(seq)):
+        #print seq[i:]
+        print seq[i],
+        print i
+        if i+1<len(seq) and seq [i] in A and seq[i]!='$':
+             __Ajout_Dolar_Prefixe(A, seq[i+1:])
             
         
-#    #print N0
-#    if 'succ'
-##    print Fils
-#    if seq[-2] in Fils:
-#        print " suffixe existe"
-#    else:
-#        print " suffixe n'existe pas"
-#        __Insert_Noeud_Successeurs__(Fils,seq[-2]+"$")
-#    if 'succ' in Fils:
-#     print Fils
-#     print N0
-#    if __Is_Racine__(N0)!=True:# il existe un lien successeur = ce n'est pas une racine
-#       if len(seq)>1: # on est pas a la derniere lettre
-#            return A
-#       else:
-#        return "poul"
-#    return A
+        
+
 
 def __Construire_Arbre__():
     from __saisie__ import SaisieADN
@@ -128,15 +123,13 @@ def __Construire_Arbre__():
     A=__Initialisation_Arbre()
     #N0 le noeud le plus profond
     N0=A
-    for i in range(len(seq)+1):
-        if i ==0:
-            N0=__Insert_Noeud_Successeurs__(A,seq[i])
-            #print N0
-            #__Insert_Suffixe__(N0,seq[i])
-        else:
-            N0=__Insert_Noeud_Successeurs__(A,seq[0:i])
-            #print N0
-            #__Insert_Suffixe__(N0,seq[0:i])
+    
+    for i in range(1,len(seq)+1):
+        print seq[:i]
+        N0=__Insert_Noeud_Successeurs__(A,seq[:i])
+        __Insert_Suffixe__(N0,seq[:i])
+    __Ajout_Dolar_Prefixe(A,seq)
+    print A   
 #    seq="attcg$"
 #    for i in range(len(seq)+1):
 #        if i ==0:
@@ -163,4 +156,4 @@ def __Construire_Arbre__():
 #    prf=__Noeud_Profond__(A,seq)
 #    print prf
 #    aff_suffixe(prf)
-    print A
+    return A

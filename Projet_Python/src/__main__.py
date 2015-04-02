@@ -110,7 +110,7 @@ def Menu():
                     
                 # Autres choix du menu
                 elif Choix=="Q":
-                    menu()
+                    Menu()
                     break
                 else:
                     print("Erreur de saisie!! RECOMMENCEZ ")
