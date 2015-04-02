@@ -55,7 +55,6 @@ def aff_pre(liste):
             
             print ("Motif: '"+liste_pre[j]+"'\n"+" Occurence : "+str(liste_occ[j])+"\n")
             j+=1
-  
 
 def aff_arbre_simple (A,i):
     """
@@ -77,3 +76,4 @@ def aff_arbre_simple (A,i):
             print"\n"
         print lettre+" (profondeur "+str(i)+")",
         aff_arbre_simple (A[lettre],i+1)
+
