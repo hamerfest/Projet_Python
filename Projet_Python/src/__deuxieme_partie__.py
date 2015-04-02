@@ -102,7 +102,7 @@ def __Insert_Suffixe__(A,seq):
 #    return A
 
 
-def __Construire_Arbre__():
+def __Construire_Arbre__(seq):
     from __saisie__ import SaisieADN
     from __affichage__ import aff_arbre_simple , aff_suffixe
     """
@@ -111,9 +111,7 @@ def __Construire_Arbre__():
     construit l'arbre
     visualise l'arbre
     """
-    print "Saisissez une sequence nucleique : "
-    seq=SaisieADN()
-    seq=seq+"$"
+    
     #initialisation
     A=__Initialisation_Arbre()
     print A
@@ -145,4 +143,54 @@ def __Construire_Arbre__():
 #    prf=__Noeud_Profond__(A,seq)
 #    print prf
 #    aff_suffixe(prf)
-    print A
+#    print A
+    return(A)
+    
+    
+    
+     # Affihe si le motif  appartient à l'arbre 
+
+def is_motif(A,q,motif_bis,isit):
+    if A!={} and q!='': 
+        if len(q)<len(motif_bis):
+            motif_bis=motif_bis[1:]
+            if A['a']!={}:
+                is_motif(A['a'],q,(motif_bis+'a'),isit)
+            if A['t']!={}:
+                is_motif(A['t'],q,(motif_bis+'t'),isit)
+            if A['c']!={}:
+                is_motif(A['c'],q,(motif_bis+'c'),isit)
+            if A['g']!={}:
+                is_motif(A['g'],q,(motif_bis+'g'),isit) 
+          
+        if len(q)>len(motif_bis):
+            if A['a']!={}:
+                is_motif(A['a'],q,(motif_bis+'a'),isit)
+            if A['t']!={}:
+                is_motif(A['t'],q,(motif_bis+'t'),isit)
+            if A['c']!={}:
+                is_motif(A['c'],q,(motif_bis+'c'),isit)
+            if A['g']!={}:
+                is_motif(A['g'],q,(motif_bis+'g'),isit) 
+
+            
+        if q!='' and q==motif_bis:
+            isit+=1
+            
+    return (isit)
+    
+    
+#    if A!={}and k>=0:
+#        if motif!='' and motif==motif_bis:
+#            print "¤ Nombres d'occurences du motif '",motif,"' dans la séquence : ",A['val']
+#        # Récursivité qui construit les motifs
+#        k-=1
+#        if A['a']!={}:
+#            is_motif(A['a'],motif,k,(motif_bis+'a'))
+#        if A['t']!={}:
+#            is_motif(A['t'],motif,k,(motif_bis+'t'))
+#        if A['c']!={}:
+#            is_motif(A['c'],motif,k,(motif_bis+'c'))
+#        if A['g']!={}:
+#            is_motif(A['g'],motif,k,(motif_bis+'g'))      
+            
