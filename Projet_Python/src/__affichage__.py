@@ -129,7 +129,7 @@ def aff_suffixe (A):
     """
     #TODO ajouter des | pour voir mieux les noeud de même profondeur et de la même racine
     for lettre in A.keys():
-        if lettre=='succ':# cas si lien suffixe
+        if lettre=='suff':# cas si lien suffixe
             print A['succ']
             print"***\n"
             aff_suffixe(A['succ'])

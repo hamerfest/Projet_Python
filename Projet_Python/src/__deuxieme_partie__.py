@@ -18,7 +18,7 @@ def __Insert_Noeud_Successeurs__(A,seq):
     retourne le noeud le plus profond
     """
     #TODO vérifier qu'il a tout les cas possible et non des supperflus
-    print" Sequence :"+seq
+    
 #    if A is None: #pas de noeud
 #        print "¤ Creation de l'abre ..."
 #        if len(seq)>0: # il reste des lettre
@@ -35,7 +35,6 @@ def __Insert_Noeud_Successeurs__(A,seq):
             #TODO traitement de fin de suffixe
             A['$']={}
             return A
-
     elif seq[0] in A  :# Il existe un etiquette de la premiere lettre
         if seq[0]=='$':# Fin de sequence
             #TODO traitement de fin de suffixe
@@ -72,6 +71,7 @@ def __Noeud_Profond__(A,seq):
         return __Noeud_Profond__(A[seq[0]],seq[1:])
     else:
         return A
+    
 def __Is_Racine__(A):
     """
     Test si c'est une racine ==> return true sinon false
@@ -81,16 +81,27 @@ def __Is_Racine__(A):
     else:
         return True
     
-def __Insert_Suffixe__(A,seq):
-    N0=__Noeud_Profond__(A,seq)
-    #print N0
-    Fils=N0['succ']
-#    print Fils
-    if seq[-2] in Fils:
-        print " suffixe existe"
+def __Insert_Suffixe__(N0,seq):
+    print N0
+    print seq
+    if 'suff' in N0:
+        Fils =N0
+        N0=N0['suff']
+        if seq[-1] in Fils:#t existe chez le pere
+            print"hello"
     else:
-        print " suffixe n'existe pas"
-        __Insert_Noeud_Successeurs__(Fils,seq[-2]+"$")
+        N0[seq[-1]]={"suff":N0}
+        
+            
+        
+#    #print N0
+#    if 'succ'
+##    print Fils
+#    if seq[-2] in Fils:
+#        print " suffixe existe"
+#    else:
+#        print " suffixe n'existe pas"
+#        __Insert_Noeud_Successeurs__(Fils,seq[-2]+"$")
 #    if 'succ' in Fils:
 #     print Fils
 #     print N0
@@ -100,7 +111,6 @@ def __Insert_Suffixe__(A,seq):
 #       else:
 #        return "poul"
 #    return A
-
 
 def __Construire_Arbre__(seq):
     from __saisie__ import SaisieADN
@@ -114,16 +124,24 @@ def __Construire_Arbre__(seq):
     
     #initialisation
     A=__Initialisation_Arbre()
-    print A
+    #N0 le noeud le plus profond
     N0=A
-    print N0
-    print seq
-    for i in range(len(seq)):
-        print i
+    for i in range(len(seq)+1):
         if i ==0:
             N0=__Insert_Noeud_Successeurs__(A,seq[i])
+            #print N0
+            #__Insert_Suffixe__(N0,seq[i])
         else:
             N0=__Insert_Noeud_Successeurs__(A,seq[0:i])
+            #print N0
+            #__Insert_Suffixe__(N0,seq[0:i])
+#    seq="attcg$"
+#    for i in range(len(seq)+1):
+#        if i ==0:
+#            N0=__Insert_Noeud_Successeurs__(A,seq[i])
+#            __Insert_Suffixe__(N0,seq)
+#        else:
+#            N0=__Insert_Noeud_Successeurs__(A,seq[0:i])
     #A=__Insert_Noeud_Successeurs__(A,"atcgt$")
 #    aff_arbre_simple (A,0)
 #    print""
