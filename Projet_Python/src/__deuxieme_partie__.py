@@ -113,29 +113,46 @@ def __Construire_Arbre__(seq):
     
      # Affihe si le motif  appartient à l'arbre 
 
-def is_motif(A,q,motif_bis,isit):
-    if A!={} and q!='': 
-        if len(q)<len(motif_bis):
-            motif_bis=motif_bis[1:]
-            if A['a']!={}:
-                is_motif(A['a'],q,(motif_bis+'a'),isit)
-            if A['t']!={}:
-                is_motif(A['t'],q,(motif_bis+'t'),isit)
-            if A['c']!={}:
-                is_motif(A['c'],q,(motif_bis+'c'),isit)
-            if A['g']!={}:
-                is_motif(A['g'],q,(motif_bis+'g'),isit) 
-          
-        if len(q)>len(motif_bis):
-            if A['a']!={}:
-                is_motif(A['a'],q,(motif_bis+'a'),isit)
-            if A['t']!={}:
-                is_motif(A['t'],q,(motif_bis+'t'),isit)
-            if A['c']!={}:
-                is_motif(A['c'],q,(motif_bis+'c'),isit)
-            if A['g']!={}:
-                is_motif(A['g'],q,(motif_bis+'g'),isit) 
-
+def is_motif(A,q,motif_bis):
+    liste=[]
+    for lettre in A.keys():
+        liste.append(lettre)
+        for q_l in len(q):
+            if q[g_l]==liste[0]:
+                liste=liste[1:]
+                print 
+        
+        
+        
+#        if len(q)<len(motif_bis):
+#            motif_bis=motif_bis[1:]
+#                      
+#            if 'a' in A:
+#                is_motif(A,q,(motif_bis+'a'))
+#            if 't' in A:
+#                is_motif(A,q,(motif_bis+'t'))
+#            if 'c' in A:
+#                is_motif(A,q,(motif_bis+'c'))
+#            if 'g' in A:
+#                is_motif(A,q,(motif_bis+'g'))
+#            
+#        
+#        elif len(q)>len(motif_bis):
+#            if 'a' in A:
+#                is_motif(A,q,(motif_bis+'a'))
+#            if 't' in A:
+#                is_motif(A,q,(motif_bis+'t'))
+#            if 'c' in A:
+#                is_motif(A,q,(motif_bis+'c'))
+#            if 'g' in A:
+#                is_motif(A,q,(motif_bis+'g'))
+#                  
+#        
+#        
+#        
+#        if q==motif_bis:
+#            print("Ok")  
+#               
             
         if q!='' and q==motif_bis:
             isit+=1

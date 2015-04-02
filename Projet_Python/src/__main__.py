@@ -150,19 +150,24 @@ def Menu():
                 ## Exploitation de l'arbre
                 # Choix B = Déterminer si la chaîne donnée q est un motif de S ou un suffixe de S
                 elif Choix=="B": 
-                    print "Saisissez une chaine : "
-                    q=SaisieADNBornee(0,(len(seq)))
-                    isit=is_motif(A,q,'',0) 
-                    if isit > 0 :
-                        print("¤ '"+q+"'  est un motif de S.")
-                        print("********************************************************************************\n")
-                    elif isit==0:
-                        print("¤ '"+q+"'  n'est PAS un motif de S.")
-                        print("********************************************************************************\n")
+                    if seq==None:
+                        print "Il vous faut construire un arbre avant d'effectuer cette action."
+                        continue
+                    else:
+                        print ("¤ Séquence enregistrée :"+seq)
+                        print "Saisissez une chaine : "
+                        q=SaisieADNBornee(0,(len(seq)))
+                        is_motif(A,q,'')
+#                        if m>0 :
+#                            print("¤ '"+q+"'  est un motif de S: '"+seq+"'")
+#                            print("******c**************************************************************************\n")
+#                        elif m<0:
+#                            print("¤ '"+q+"'  n'est PAS un motif de S: '"+seq+"'")
+#                            print("********************************************************************************\n")
 
                 ## Autres choix du menu
                 elif Choix=="Q":
-                    menu()
+                    Menu()
                     break
                 else:
                     print("Erreur de saisie!! RECOMMENCEZ ")
