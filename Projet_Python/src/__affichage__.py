@@ -70,10 +70,30 @@ def aff_arbre_simple (A,i):
     """
     #TODO ajouter des | pour voir mieux les noeud de même profondeur et de la même racine
     for lettre in A.keys():
-        if i!=0:
-         print"\n"+" "*i+"|->",
-        else :
-            print"\n"
-        print lettre+" (profondeur "+str(i)+")",
-        aff_arbre_simple (A[lettre],i+1)
+        if lettre!='succ':# cas si lien suffixe
+            if i!=0:
+             print"\n"+" "*i+"|->",
+            else :
+                print"\n"
+            print lettre+" (profondeur "+str(i)+")",
+            aff_arbre_simple (A[lettre],i+1)
 
+def aff_suffixe (A):
+    
+    """
+    Affiche lien 
+    avec la profondeur
+    disposition en speudo arbre 
+    exemple pour un arbre contenant tata et tati on a
+    t
+     ->a
+       ->t
+         ->a
+       ->i
+    """
+    #TODO ajouter des | pour voir mieux les noeud de même profondeur et de la même racine
+    for lettre in A.keys():
+        if lettre=='succ':# cas si lien suffixe
+            print A['succ']
+            print"***\n"
+            aff_suffixe(A['succ'])
