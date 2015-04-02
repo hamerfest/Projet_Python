@@ -123,6 +123,7 @@ def Menu():
             print("********************************************************************************\n") 
 
             from __premiere_partie_B__ import __Creation_des_tables__ , __Utilisation_des_tables__
+            
             L,L1,H,M=__Creation_des_tables__()
             __Utilisation_des_tables__(L,L1,H,M)
             
@@ -130,8 +131,9 @@ def Menu():
             print("********************************************************************************")
             print("                         ARBRE DES SUFFIXES")
             print("********************************************************************************\n")
-            import __deuxieme_partie__
-            __deuxieme_partie__.__construire_arbre__()
+            from __deuxieme_partie__ import __Construire_Arbre__
+            
+            __Construire_Arbre__()
         elif Choix=="Q":
             print("Au revoir")    
             exit()

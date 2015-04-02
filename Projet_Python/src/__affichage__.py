@@ -78,4 +78,58 @@ def aff_motif(A,motif,k,motif_bis):
             aff_motif(A['c'],motif,k,(motif_bis+'c'))
         if A['g']!={}:
             aff_motif(A['g'],motif,k,(motif_bis+'g'))      
+            aff_arbre(A['g'],i+1)
             
+# Affihe la liste des préfixes sur une séquence avec un entier k
+def aff_pre(liste):
+    j=0
+    liste_pre=[]
+    liste_occ=[]
+    for n in liste:
+            liste_pre.append(liste[j])
+            liste_occ.append(liste_pre.count(liste[j]))
+            
+            print ("Motif: '"+liste_pre[j]+"'\n"+" Occurence : "+str(liste_occ[j])+"\n")
+            j+=1
+
+def aff_arbre_simple (A,i):
+    """
+    Affiche chaque noeud dispose dans l'arbre 
+    avec la profondeur
+    disposition en speudo arbre 
+    exemple pour un arbre contenant tata et tati on a
+    t
+     ->a
+       ->t
+         ->a
+       ->i
+    """
+    #TODO ajouter des | pour voir mieux les noeud de même profondeur et de la même racine
+    for lettre in A.keys():
+        if lettre!='succ':# cas si lien suffixe
+            if i!=0:
+             print"\n"+" "*i+"|->",
+            else :
+                print"\n"
+            print lettre+" (profondeur "+str(i)+")",
+            aff_arbre_simple (A[lettre],i+1)
+
+def aff_suffixe (A):
+    
+    """
+    Affiche lien 
+    avec la profondeur
+    disposition en speudo arbre 
+    exemple pour un arbre contenant tata et tati on a
+    t
+     ->a
+       ->t
+         ->a
+       ->i
+    """
+    #TODO ajouter des | pour voir mieux les noeud de même profondeur et de la même racine
+    for lettre in A.keys():
+        if lettre=='succ':# cas si lien suffixe
+            print A['succ']
+            print"***\n"
+            aff_suffixe(A['succ'])

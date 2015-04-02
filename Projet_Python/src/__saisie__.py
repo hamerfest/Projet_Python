@@ -67,7 +67,8 @@ def SaisieADN():
     """
     while True:
         ADN=raw_input("Entrer un sequence d'ADN (atgc) : ")
-        ADN.lower()
+        ADN=ADN.lower()
+        
         if ValideADN(ADN):
             print "Sequence saisie correcte"
             break
