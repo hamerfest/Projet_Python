@@ -40,3 +40,14 @@ def aff_arbre (A,i):
         if A['g']!={}:
             print 'g',
             aff_arbre(A['g'],i+1)
+
+def aff_arbre_simple (A,i):
+    #TODO ajouter des | pour voir mieux les noeud de même profondeur et de la même racine
+    for lettre in A.keys():
+        print " "
+        if i!=0:
+         print"\n"+" "*i+"|->",
+        else :
+            print"\n"
+        print lettre+" (profondeur "+str(i)+")",
+        aff_arbre_simple (A[lettre],i+1)

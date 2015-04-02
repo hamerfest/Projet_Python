@@ -1,3 +1,4 @@
+#-*- coding:Utf-8 -*-
 # 
 # Recherche des motifs repetes - Indexation par table de hachage
 # 
