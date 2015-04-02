@@ -46,7 +46,6 @@ def Menu():
                             print ('Séquence trop courte par rapport à votre entier !')
                             seq= None
                             
-                    __affichage__.menu_arbre_pref()
                     __affichage__.aff_seq(seq)
                     __affichage__.aff_k(k)
                     print("********************************************************************************\n")
@@ -60,7 +59,6 @@ def Menu():
                             print ('Entier k trop grand par rapport à votre séquence !')
                             k= None
                             
-                    __affichage__.menu_arbre_pref()
                     __affichage__.aff_seq(seq)
                     __affichage__.aff_k(k)
                     print("********************************************************************************\n")
@@ -73,7 +71,6 @@ def Menu():
                         print("Une séquence et/ou un entier sont nécessaires pour construire l'arbre !")
                     else:
                         A=__premiere_partie_A__.construction_arbre(A,seq,k)
-                        __affichage__.menu_arbre_pref()
                         __affichage__.aff_seq(seq)
                         __affichage__.aff_k(k)
                         print('¤ Arbre de préfixes:')
@@ -87,7 +84,6 @@ def Menu():
                     if seq==None or k==None or A=={}:
                         print("Un arbre est nécessaire pour extraire la liste des préfixes !")
                     else:
-                        __affichage__.menu_arbre_pref()
                         __affichage__.aff_seq(seq)
                         __affichage__.aff_k(k)
                         print('¤ Liste des préfixes et leurs occurences:')
@@ -101,7 +97,6 @@ def Menu():
                         print("Un arbre est nécessaire pour extraire la liste des préfixes !")
                     else:
                         motif=__saisie__.SaisieADNBornee(0,k)
-                        __affichage__.menu_arbre_pref()
                         __affichage__.aff_seq(seq)
                         __affichage__.aff_k(k)
                         __affichage__.aff_motif(A,motif,k,'')
@@ -124,6 +119,7 @@ def Menu():
 
             from __premiere_partie_B__ import __Creation_des_tables__ , __Utilisation_des_tables__
             
+            
             L,L1,H,M=__Creation_des_tables__()
             __Utilisation_des_tables__(L,L1,H,M)
             
@@ -131,9 +127,48 @@ def Menu():
             print("********************************************************************************")
             print("                         ARBRE DES SUFFIXES")
             print("********************************************************************************\n")
-            from __deuxieme_partie__ import __Construire_Arbre__
+            print("""
+    A => Constuire un arbre suffixe
+    B => Saisir une chaîne et déterminer si c'est un motif ou un suffixe de X
+    Q => Quitter
+    """)
+            while True:
+                Choix=raw_input("Sélectionner un menu : ")
+                Choix=Choix.upper()
+                print ("Valeur saisie : "+Choix)
             
-            __Construire_Arbre__()
+                from __deuxieme_partie__ import __Construire_Arbre__,is_motif
+                from __saisie__ import SaisieADN,SaisieADNBornee
+
+                if Choix=="A":
+                        print "Saisissez une sequence nucleique : "
+                        seq=SaisieADN()
+                        seq=seq+"$"
+                        A=__Construire_Arbre__(seq)
+                        print(A)
+                        continue
+                ## Exploitation de l'arbre
+                # Choix B = Déterminer si la chaîne donnée q est un motif de S ou un suffixe de S
+                elif Choix=="B": 
+                    print "Saisissez une chaine : "
+                    q=SaisieADNBornee(0,(len(seq)))
+                    isit=is_motif(A,q,'',0) 
+                    if isit > 0 :
+                        print("¤ '"+q+"'  est un motif de S.")
+                        print("********************************************************************************\n")
+                    elif isit==0:
+                        print("¤ '"+q+"'  n'est PAS un motif de S.")
+                        print("********************************************************************************\n")
+
+                ## Autres choix du menu
+                elif Choix=="Q":
+                    menu()
+                    break
+                else:
+                    print("Erreur de saisie!! RECOMMENCEZ ")
+                    continue 
+
+
         elif Choix=="Q":
             print("Au revoir")    
             exit()
