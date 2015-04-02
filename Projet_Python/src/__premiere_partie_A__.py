@@ -34,20 +34,4 @@ def construction_arbre (A,seq,k):
         if len(v) <= k and v!='': #Insertion dans l'arbre pour les motifs inférieurs à k
             A=insertion_arbre(A,v)
     return (A)
-
-    
-# Parcour préfixe
-def liste_pref(seq,k):
-    liste=['']
-    liste_pre=[]
-    liste_occ=[]
-    for l in seq:
-        liste_bis=['']
-        for v in liste:
-            if len(v) < k:
-                    liste_bis.append(v+l)
-        liste=liste_bis
-        liste_pre=liste_pre+liste #Stockage de tout les préfixes
-        
-    return (liste_pre)
   
