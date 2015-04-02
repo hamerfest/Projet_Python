@@ -3,9 +3,9 @@
 # 
 
 #sequence test
-seq="accaccaccag"
+    #seq="accaccaccag"
 #taille test
-k=3
+    #k=3
 
 def __Creation_Liste_Taille__(sequence,taille):
     """
@@ -15,7 +15,7 @@ def __Creation_Liste_Taille__(sequence,taille):
     L = list() # liste vide
     for i in range(len(sequence)): # Parcours de la chaine
         #print lettre
-        if len(sequence[i:])>=taille: # sortie si il reste moins de 3 lettresb
+        if len(sequence[i:])>=taille: # sortie si il reste moins de 3 lettres
            L.append(sequence[i:i+taille])
         else :
             break
@@ -41,7 +41,6 @@ def __Base_4_En_Base_10__(base4):
     base4 : string
     base10: int
     """
-    k=len(base4) #taille du motif
     base4= base4[::-1] # string reverse
     resultat=0
     pos=0 #position dans base4
@@ -76,6 +75,7 @@ def __Initialisation_Table_H_(L):
     H=list()
     
     k=len(L[0])
+    #TODO : Gestion de k trop grand
     try :
         for i in range(4**k): # de 0 a 4**k-1
             H.append(0)
@@ -87,6 +87,7 @@ def __Initialisation_Table_H_(L):
         
 
 def __Remplissage_M_H__(L1,H,M):
+    # TODO : gestion de k trop grand
     try:
         # de 1 a taille de L1
         for i in range(len(L1)): # de 0 a taille L1-1 
@@ -104,40 +105,38 @@ def __Remplissage_M_H__(L1,H,M):
 
 
 def __Creation_des_tables__():
-    import __saisie__
+    from __saisie__ import SaisieADN , SaisieIntBorne
     """
     Programme qui permet de saisir une sequence nucleique
     puis creer les listes L et L1 et les tables H et M associes
     et les affiche
-    """
-    #TODO 
+    """ 
     print "Saisissez une sequence nucleique : "
-    seq=__saisie__.SaisieADN()
+    seq=SaisieADN()
     #saisie controlee de taille de sequence positif et inf ou egal a la taille de seq
     print "Saisissez une taille k de motif (positif):"
-    k=__saisie__.SaisieIntBorne(1,len(seq))
+    k=SaisieIntBorne(1,len(seq))
 
     L =__Creation_Liste_Taille__(seq,k)
     L1=__Creation_Liste_Taille_Base10__(L)
     M=__Initialisation_Table_M_(L1)
     H=__Initialisation_Table_H_(L)
     H,M=__Remplissage_M_H__(L1,H,M)
-    print "Liste cree L :"
+    print "¤ Liste cree L :"
     print L
-    print "Liste cree L1 :"
+    print "¤ Liste cree L1 :"
     print L1
-    print "Table associe M :"
+    print "¤ Table associe M :"
     print M
-    print "Table associe H :"
+    print "¤ Table associe H :"
     print H
     return L,L1,H,M
 
 def __Utilisation_des_tables__(L,L1,H,M):
-    import __saisie__
-    #TODO verifier la taille du motif "Package saisie
+    from __saisie__ import SaisieADNBornee
+    #Saisie controlee du motif
     print "Saissez un motif de taille "+str(len(L[0]))+ ": "
-    motif=__saisie__.SaisieADNBornee(len(L[0]),len(L[0]))
-    
+    motif=SaisieADNBornee(len(L[0]),len(L[0]))
     
     #transformation du motif en score type L1
     score=__Base_4_En_Base_10__(__Lettre_Base_4__(motif))
