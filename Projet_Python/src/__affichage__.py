@@ -21,24 +21,22 @@ def aff_seq(seq):
 def aff_k(k):
     if k is None:
         print("¤ Entier : PAS D'ENTIER")
-        print("********************************************************************************\n")
     else:
         print("¤ Entier : "+str(k))
-        print("********************************************************************************\n")
         
 
-def aff_arbre (A):
+def aff_arbre (A,i):
     if A['val']!={}:
-        print(A['val'])
+        print i*'--',A['val']
         if A['a']!={}:
             print 'a',
-            aff_arbre(A['a'])
+            aff_arbre(A['a'],i+1)
         if A['t']!={}:
             print 't',
-            aff_arbre(A['t'])
+            aff_arbre(A['t'],i+1)
         if A['c']!={}:
             print 'c',
-            aff_arbre(A['c'])
+            aff_arbre(A['c'],i+1)
         if A['g']!={}:
             print 'g',
-            aff_arbre(A['g'])
+            aff_arbre(A['g'],i+1)
