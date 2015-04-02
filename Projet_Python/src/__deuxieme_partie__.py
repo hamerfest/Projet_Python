@@ -55,27 +55,7 @@ def __Insert_Noeud_Successeurs__(A,seq):
             #TODO traitement de fin de suffixe
             A['$']={}
             return A
-    
 
-def __Noeud_Profond__(A,seq):
-    """
-    Retourne le noeud le plus profond de seq -1 hors le $
-    """
-    # en gros moins la derniere lettre ==>seq[:-3]
-    if len(seq)>2:
-        return __Noeud_Profond__(A[seq[0]],seq[1:])
-    else:
-        return A
-    
-def __Is_Racine__(A):
-    """
-    Test si c'est une racine ==> return true sinon false
-    """
-    if 'succ' in A:
-        return False
-    else:
-        return True
-    
 def __Insert_Suffixe__(N0,seq):
     N=N0
     if 'suff' in N and seq[-1]!='$':
@@ -103,10 +83,6 @@ def __Ajout_Dolar_Prefixe(A,seq):
         if i+1<len(seq) and seq [i] in A and seq[i]!='$':
              __Ajout_Dolar_Prefixe(A, seq[i+1:])
             
-        
-        
-
-
 def __Construire_Arbre__(seq):
     from __saisie__ import SaisieADN
     from __affichage__ import aff_arbre_simple , aff_suffixe
@@ -127,34 +103,10 @@ def __Construire_Arbre__(seq):
         N0=__Insert_Noeud_Successeurs__(A,seq[:i])
         __Insert_Suffixe__(N0,seq[:i])
     __Ajout_Dolar_Prefixe(A,seq)
-    print A   
-#    seq="attcg$"
-#    for i in range(len(seq)+1):
-#        if i ==0:
-#            N0=__Insert_Noeud_Successeurs__(A,seq[i])
-#            __Insert_Suffixe__(N0,seq)
-#        else:
-#            N0=__Insert_Noeud_Successeurs__(A,seq[0:i])
-    #A=__Insert_Noeud_Successeurs__(A,"atcgt$")
-#    aff_arbre_simple (A,0)
-#    print""
-#    print"\n" # retour à la ligne
-#    print A
-#    __Insert_Suffixe__(A, seq)
-#    print A['a']
-#    print"***"
-#    print A['t']
-#    print A
-##    N0 =__Noeud_Profond__(A,seq)
-##    print "\n"+str(prfd)
+
     print""
     aff_arbre_simple (A,0)
     print""
-#    print __Is_Racine__(A['a'])
-#    prf=__Noeud_Profond__(A,seq)
-#    print prf
-#    aff_suffixe(prf)
-#    print A
     return(A)
     
     
