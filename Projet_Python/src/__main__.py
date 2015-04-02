@@ -80,6 +80,21 @@ def Menu():
                         print("********************************************************************************\n")
                     continue
                 
+                # Construction de l'arbre - Utilisation de l'arbre
+                ## Choix D = liste des préfixes et leurs occurences sur une sequence /!\ UTILISE A NOUVEAU LE PARCOUR PREFIXE /!\
+                elif Choix=="D":
+                    if seq==None or k==None:
+                        print("Une séquence et/ou un entier sont nécessaires pour construire l'arbre !")
+                    else:
+                        A={}
+                        __affichage__.menu_arbre_pref()
+                        __affichage__.aff_seq(seq)
+                        __affichage__.aff_k(k)
+                        print('¤ Liste des préfixes et leurs occurences:')
+                        __affichage__.aff_pre(__premiere_partie_A__.liste_pref(seq,k))
+                        print("********************************************************************************\n")
+                    continue    
+                    
                 # Autres choix du menu
                 elif Choix=="Q":
                     menu()

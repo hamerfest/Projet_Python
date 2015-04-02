@@ -8,9 +8,11 @@ def menu_arbre_pref():
     A => Saisir une nouvelle séquence (a,c,t,g)
     B => Saisir un nouveau entier k
     C => Construire et visualiser l'arbre des préfixes
+    D => Liste des préfixes et leurs occurences
     ....
     Q => Quitter
     """)
+
 
 def aff_seq(seq):
     if seq is None:
@@ -18,13 +20,14 @@ def aff_seq(seq):
     else:
         print("¤ Séquence : "+seq)
 
+
 def aff_k(k):
     if k is None:
         print("¤ Entier : PAS D'ENTIER")
     else:
         print("¤ Entier : "+str(k))
         
-
+# Affiche l'arbe des préfixes, '--'= une profondeure
 def aff_arbre (A,i):
     if A['val']!={}:
         print i*'--',A['val']
@@ -40,3 +43,16 @@ def aff_arbre (A,i):
         if A['g']!={}:
             print 'g',
             aff_arbre(A['g'],i+1)
+            
+# Affihe la liste des préfixes sur une séquence avec un entier k
+def aff_pre(liste):
+    j=0
+    liste_pre=[]
+    liste_occ=[]
+    for n in liste:
+            liste_pre.append(liste[j])
+            liste_occ.append(liste_pre.count(liste[j]))
+            
+            print ("Motif: '"+liste_pre[j]+"'\n"+" Occurence : "+str(liste_occ[j])+"\n")
+            j+=1
+  
