@@ -75,15 +75,19 @@ def __Insert_Suffixe__(N0,seq):
             N[seq[0]]={'suff':N}
 
 def __Ajout_Dolar_Prefixe(A,seq):
-    print seq
-    if len(seq)>2:
-        if seq[0] in A:
-            __Ajout_Dolar_Prefixe(A[seq[0]], seq[1:])
-        else:
-            for lettre in A.key():
-                __Ajout_Dolar_Prefixe(A[lettre], seq[1:])
-    elif seq[0] in A:
-        A[seq[0]]={"$":{}}
+    #TODO ne fonctionne pas erreur index range
+    print " fonction ne fonctionne pas"
+#    for i in range(1,len(seq)):
+#        if seq[i] in A.keys() and i<len(seq):
+#                
+#            
+#            if seq[0] in A:
+#                __Ajout_Dolar_Prefixe(A[seq[0]], seq[1:])
+#            else:
+#            for lettre in A.key():
+#                __Ajout_Dolar_Prefixe(A[lettre], seq[1:])
+#    elif seq[0] in A:
+#        A[seq[0]]={"$":{}}
         
         
             
@@ -106,7 +110,7 @@ def __Construire_Arbre__(seq):
         N0=__Insert_Noeud_Successeurs__(A,seq[:i])
         __Insert_Suffixe__(N0,seq[:i])
     # ne fonctionne pas pour l'instant    
-    #__Ajout_Dolar_Prefixe(A,seq)
+    __Ajout_Dolar_Prefixe(A,seq)
 
     print""
     aff_arbre_simple (A,0)
