@@ -17,11 +17,10 @@ def __Insert_Noeud_Successeurs__(A,seq):
     depuis le noeud/racine A selon la sequence seq
     retourne le noeud le plus profond
     """
-    #TODO vérifier qu'il a tout les cas possible et non des supperflus
     
     if A=={}: # noeud vide => creer etiquette lettre
         if seq[0]=='$':
-            #TODO traitement de fin de suffixe
+            
             A['$']={}
             return A
         elif len(seq)==1 :#seq est de 1
@@ -32,11 +31,11 @@ def __Insert_Noeud_Successeurs__(A,seq):
             return __Insert_Noeud_Successeurs__(A[seq[0]], seq[1:])#on passe à la lettre suivante
     elif seq[0] in A  :# Il existe un etiquette de la premiere lettre
         if seq[0]=='$':# Fin de sequence
-            #TODO traitement de fin de suffixe
+            #traitement de fin de suffixe
             A['$']={}
             return A
         elif A[seq[0]]=={}:#etiquette existe vide
-            #TODO creer etiquette
+            # creer etiquette
             if len(seq[1:])>0: # il reste des lettres après
                 return __Insert_Noeud_Successeurs__(A[seq[0]], seq[1:])#on passe à la lettre suivante
             else:
@@ -52,7 +51,7 @@ def __Insert_Noeud_Successeurs__(A,seq):
             A[seq[0]]={}           
             return __Insert_Noeud_Successeurs__(A[seq[0]], seq[1:])#on passe à la lettre suivante
         else :
-            #TODO traitement de fin de suffixe
+            # traitement de fin de suffixe
             A['$']={}
             return A
 
@@ -76,12 +75,17 @@ def __Insert_Suffixe__(N0,seq):
             N[seq[0]]={'suff':N}
 
 def __Ajout_Dolar_Prefixe(A,seq):
-    for i in range(len(seq)):
-        #print seq[i:]
-        print seq[i],
-        print i
-        if i+1<len(seq) and seq [i] in A and seq[i]!='$':
-             __Ajout_Dolar_Prefixe(A, seq[i+1:])
+    print seq
+    if len(seq)>2:
+        if seq[0] in A:
+            __Ajout_Dolar_Prefixe(A[seq[0]], seq[1:])
+        else:
+            for lettre in A.key():
+                __Ajout_Dolar_Prefixe(A[lettre], seq[1:])
+    elif seq[0] in A:
+        A[seq[0]]={"$":{}}
+        
+        
             
 def __Construire_Arbre__(seq):
     from __saisie__ import SaisieADN
@@ -99,15 +103,15 @@ def __Construire_Arbre__(seq):
     N0=A
     
     for i in range(1,len(seq)+1):
-        print seq[:i]
         N0=__Insert_Noeud_Successeurs__(A,seq[:i])
         __Insert_Suffixe__(N0,seq[:i])
-    __Ajout_Dolar_Prefixe(A,seq)
+    # ne fonctionne pas pour l'instant    
+    #__Ajout_Dolar_Prefixe(A,seq)
 
     print""
     aff_arbre_simple (A,0)
     print""
-    return(A)
+
     
     
     
@@ -115,13 +119,22 @@ def __Construire_Arbre__(seq):
 
 def is_motif(A,q,motif_bis):
     liste=[]
-    for lettre in A.keys():
-        liste.append(lettre)
-        for q_l in len(q):
-            if q[g_l]==liste[0]:
-                liste=liste[1:]
-                print 
-        
+    test = q[len(motif_bis)]
+    print test
+    if len(q)==len(motif_bis):
+        return true
+    elif test not in A :
+        if seq(motif_bis) !=0:
+            motif_bis=""
+        for lettre in A.key():
+            print A[lettre]
+            return is_motif(A[lettre], q, 'motif_bis') 
+        return false
+    else:
+        print " on continue "+ test
+        print A [test]
+        return is_motif(A[test], q, 'motif_bis'+test)
+    return false
         
         
 #        if len(q)<len(motif_bis):
@@ -153,11 +166,7 @@ def is_motif(A,q,motif_bis):
 #        if q==motif_bis:
 #            print("Ok")  
 #               
-            
-        if q!='' and q==motif_bis:
-            isit+=1
-            
-    return (isit)
+
     
     
 #    if A!={}and k>=0:
